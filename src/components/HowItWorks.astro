@@ -1,0 +1,65 @@
+---
+// HowItWorks.astro - 3-step streamlined workflow
+const steps = [
+  {
+    step: "01",
+    title: "Unscramble Letters Instantly",
+    desc: "Type in your scrambled letters or paste them to unscramble. Use ? or * as wildcards for unknown letters. Our word unscrambler handles up to 15 letters instantly.",
+    icon: `<svg class="w-6 h-6 text-cyan-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>`
+  },
+  {
+    step: "02",
+    title: "Apply Advanced Filters",
+    desc: "Narrow results by word length, starting letters, or ending letters. Find word unscrambler 5 letters, 7 letters, or any length. Choose from ENABLE, TWL, or CSW dictionaries.",
+    icon: `<svg class="w-6 h-6 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>`
+  },
+  {
+    step: "03",
+    title: "Get Best Word Unscrambler Results",
+    desc: "View all valid words with definitions and frequency scores, organized by length. Perfect for Scrabble, Wordle, and word games. Click to copy any word instantly.",
+    icon: `<svg class="w-6 h-6 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`
+  }
+];
+---
+
+<section id="how-it-works" class="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">
+  <div class="text-center">
+    <span class="font-mono text-xs font-semibold tracking-wider text-[var(--mute)] uppercase">
+      STREAMLINED WORKFLOW
+    </span>
+    <h2 class="mt-2 text-2xl font-bold tracking-tight text-[var(--ink)] sm:text-3xl">
+      How to Unscramble Words in 3 Steps
+    </h2>
+    <p class="mx-auto mt-2 max-w-xl text-sm text-[var(--body)]">
+      No sign-ups, no registration, completely free. Start unscrambling instantly.
+    </p>
+  </div>
+
+  <div class="mt-12 grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 md:grid-cols-3">
+    {steps.map(s => (
+      <div class="geist-card relative flex flex-col justify-between rounded-2xl p-4 sm:p-6 md:p-8">
+        <div>
+          <div class="flex items-center justify-between">
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--canvas-subtle)] border border-[var(--hairline)]">
+              <Fragment set:html={s.icon} />
+            </div>
+            <span class="font-mono text-2xl font-black text-[var(--faint)]">
+              {s.step}
+            </span>
+          </div>
+
+          <h3 class="mt-6 text-lg font-bold text-[var(--ink)]">
+            {s.title}
+          </h3>
+          <p class="mt-2 text-sm leading-relaxed text-[var(--body)]">
+            {s.desc}
+          </p>
+        </div>
+
+        <div class="mt-6 border-t border-[var(--hairline-soft)] pt-4 font-mono text-xs text-[var(--mute)]">
+          ✓ Instant & Free
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

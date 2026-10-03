@@ -1,0 +1,138 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Server Error - Word Unscrambler"
+  description="Something went wrong on our end. We're working to fix it. Please try again later."
+  canonical="https://wordunscramblar.com/500"
+>
+  <Navbar />
+  <main class="flex-1">
+    <div class="mx-auto max-w-4xl px-4 py-20 sm:px-6 lg:px-8">
+      <!-- Error Container -->
+      <div class="text-center">
+        <!-- Large 500 Display -->
+        <div class="mb-8">
+          <h1 class="mb-4 text-center text-9xl font-bold">
+            <span class="bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">
+              500
+            </span>
+          </h1>
+        </div>
+
+        <!-- Error Message -->
+        <div class="mb-8">
+          <h2 class="mb-4 text-3xl font-bold text-slate-900 dark:text-white sm:text-4xl">
+            Server Error
+          </h2>
+          <p class="mx-auto mb-8 max-w-2xl text-lg text-slate-600 dark:text-slate-400">
+            Something went wrong on our end. We're actively working to fix this issue. Please try again in a few moments.
+          </p>
+        </div>
+
+        <!-- Error Details -->
+        <div class="mb-12 rounded-lg border border-red-200 bg-red-50 p-6 dark:border-red-900/30 dark:bg-red-900/20">
+          <h3 class="mb-4 text-lg font-semibold text-red-900 dark:text-red-200">
+            What you can do:
+          </h3>
+          <ul class="space-y-2 text-left text-red-800 dark:text-red-300">
+            <li class="flex items-start">
+              <span class="mr-3 mt-1">•</span>
+              <span>Refresh the page and try again</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3 mt-1">•</span>
+              <span>Clear your browser cache and cookies</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3 mt-1">•</span>
+              <span>Try again in a few minutes</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3 mt-1">•</span>
+              <span>Contact our support team if the problem persists</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Status Information -->
+        <div class="mb-12 rounded-lg border border-slate-200 bg-slate-50 p-6 dark:border-slate-700 dark:bg-slate-900/50">
+          <p class="mb-2 text-sm text-slate-600 dark:text-slate-400">
+            <span class="font-semibold">Error Code:</span> 500 Internal Server Error
+          </p>
+          <p class="text-sm text-slate-600 dark:text-slate-400">
+            <span class="font-semibold">Time:</span> {new Date().toLocaleString()}
+          </p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col gap-4 sm:flex-row sm:justify-center">
+          <button
+            onclick="location.reload()"
+            class="group relative inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-[#00dfd8] to-[#0099ff] px-8 py-3 font-semibold text-white transition-all duration-300 hover:shadow-lg hover:shadow-[#00dfd8]/50 active:scale-95"
+          >
+            <span>Refresh Page</span>
+            <span class="ml-2 transition-transform group-hover:rotate-180">🔄</span>
+          </button>
+          <a
+            href="/"
+            class="inline-flex items-center justify-center rounded-lg border-2 border-slate-300 px-8 py-3 font-semibold text-slate-900 transition-all duration-300 hover:border-[#00dfd8] hover:bg-[#00dfd8]/10 dark:border-slate-600 dark:text-white dark:hover:border-[#00dfd8]"
+          >
+            Go to Home
+          </a>
+        </div>
+      </div>
+
+      <!-- Status Monitoring -->
+      <div class="mt-16 border-t border-slate-200 pt-12 dark:border-slate-700">
+        <div class="rounded-lg border border-slate-200 bg-slate-50 p-8 text-center dark:border-slate-700 dark:bg-slate-900/50">
+          <h3 class="mb-3 text-lg font-semibold text-slate-900 dark:text-white">
+            Real-time Status
+          </h3>
+          <p class="mb-4 text-slate-600 dark:text-slate-400">
+            Check our service status page for updates on any ongoing incidents
+          </p>
+          <a
+            href="/"
+            class="inline-flex items-center gap-2 text-[#00dfd8] transition-colors hover:text-[#00dfd8]/80"
+          >
+            <span>Return to Word Unscrambler</span>
+            <span>→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Help Section -->
+      <div class="mt-12 grid gap-6 sm:grid-cols-2">
+        <div class="rounded-lg border border-slate-200 p-6 dark:border-slate-700">
+          <h4 class="mb-3 font-semibold text-slate-900 dark:text-white">Need Help?</h4>
+          <p class="text-sm text-slate-600 dark:text-slate-400">
+            If you continue to experience issues, our support team is here to help.
+          </p>
+          <a
+            href="/contact-us"
+            class="mt-4 inline-flex text-[#00dfd8] transition-colors hover:text-[#00dfd8]/80"
+          >
+            Contact Support →
+          </a>
+        </div>
+        <div class="rounded-lg border border-slate-200 p-6 dark:border-slate-700">
+          <h4 class="mb-3 font-semibold text-slate-900 dark:text-white">Report an Issue</h4>
+          <p class="text-sm text-slate-600 dark:text-slate-400">
+            Help us improve by reporting any errors you encounter.
+          </p>
+          <a
+            href="/contact-us"
+            class="mt-4 inline-flex text-[#00dfd8] transition-colors hover:text-[#00dfd8]/80"
+          >
+            Report Issue →
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>

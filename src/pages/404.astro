@@ -1,0 +1,111 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Page Not Found - Word Unscrambler"
+  description="The page you're looking for doesn't exist. Return to the Word Unscrambler tool."
+  canonical="https://wordunscramblar.com/404"
+>
+  <Navbar />
+  <main class="flex-1">
+    <div class="mx-auto max-w-4xl px-4 py-20 sm:px-6 lg:px-8">
+      <!-- Error Container -->
+      <div class="text-center">
+        <!-- Large 404 Display -->
+        <div class="mb-8">
+          <h1 class="mb-4 text-center text-9xl font-bold">
+            <span class="bg-gradient-to-r from-[#00dfd8] to-[#0099ff] bg-clip-text text-transparent">
+              404
+            </span>
+          </h1>
+        </div>
+
+        <!-- Error Message -->
+        <div class="mb-8">
+          <h2 class="mb-4 text-3xl font-bold text-slate-900 dark:text-white sm:text-4xl">
+            Oops! Page Not Found
+          </h2>
+          <p class="mx-auto mb-8 max-w-2xl text-lg text-slate-600 dark:text-slate-400">
+            The page you're looking for doesn't exist. It might have been moved, deleted, or the URL might be incorrect.
+          </p>
+        </div>
+
+        <!-- Helpful Suggestions -->
+        <div class="mb-12 rounded-lg border border-slate-200 bg-slate-50 p-6 dark:border-slate-700 dark:bg-slate-900/50">
+          <h3 class="mb-4 text-lg font-semibold text-slate-900 dark:text-white">
+            Here are some helpful tips:
+          </h3>
+          <ul class="space-y-2 text-left text-slate-600 dark:text-slate-400">
+            <li class="flex items-start">
+              <span class="mr-3 mt-1 text-[#00dfd8]">✓</span>
+              <span>Check the URL for typos or spelling errors</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3 mt-1 text-[#00dfd8]">✓</span>
+              <span>Return to the home page and navigate from there</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3 mt-1 text-[#00dfd8]">✓</span>
+              <span>Use the navigation menu to find what you're looking for</span>
+            </li>
+            <li class="flex items-start">
+              <span class="mr-3 mt-1 text-[#00dfd8]">✓</span>
+              <span>If you believe this is an error, please contact us</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col gap-4 sm:flex-row sm:justify-center">
+          <a
+            href="/"
+            class="group relative inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-[#00dfd8] to-[#0099ff] px-8 py-3 font-semibold text-white transition-all duration-300 hover:shadow-lg hover:shadow-[#00dfd8]/50 active:scale-95"
+          >
+            <span>Go Back Home</span>
+            <span class="ml-2 transition-transform group-hover:translate-x-1">→</span>
+          </a>
+          <a
+            href="/contact-us"
+            class="inline-flex items-center justify-center rounded-lg border-2 border-slate-300 px-8 py-3 font-semibold text-slate-900 transition-all duration-300 hover:border-[#00dfd8] hover:bg-[#00dfd8]/10 dark:border-slate-600 dark:text-white dark:hover:border-[#00dfd8]"
+          >
+            Contact Support
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="mt-16 border-t border-slate-200 pt-12 dark:border-slate-700">
+        <h3 class="mb-6 text-center text-lg font-semibold text-slate-900 dark:text-white">
+          Popular Pages
+        </h3>
+        <div class="grid gap-4 sm:grid-cols-3">
+          <a
+            href="/"
+            class="rounded-lg border border-slate-200 p-4 text-center transition-all hover:border-[#00dfd8] hover:bg-[#00dfd8]/5 dark:border-slate-700 dark:hover:bg-[#00dfd8]/10"
+          >
+            <div class="font-semibold text-slate-900 dark:text-white">Word Unscrambler</div>
+            <div class="text-sm text-slate-600 dark:text-slate-400">Find words from letters</div>
+          </a>
+          <a
+            href="/about-us"
+            class="rounded-lg border border-slate-200 p-4 text-center transition-all hover:border-[#00dfd8] hover:bg-[#00dfd8]/5 dark:border-slate-700 dark:hover:bg-[#00dfd8]/10"
+          >
+            <div class="font-semibold text-slate-900 dark:text-white">About Us</div>
+            <div class="text-sm text-slate-600 dark:text-slate-400">Learn more about us</div>
+          </a>
+          <a
+            href="/contact-us"
+            class="rounded-lg border border-slate-200 p-4 text-center transition-all hover:border-[#00dfd8] hover:bg-[#00dfd8]/5 dark:border-slate-700 dark:hover:bg-[#00dfd8]/10"
+          >
+            <div class="font-semibold text-slate-900 dark:text-white">Contact Us</div>
+            <div class="text-sm text-slate-600 dark:text-slate-400">Get in touch</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>

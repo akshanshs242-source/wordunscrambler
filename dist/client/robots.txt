@@ -1,0 +1,5 @@
+# https://viddownloadr.com robots.txt
+User-agent: *
+Allow: /
+
+Sitemap: https://viddownloadr.com/sitemap.xml

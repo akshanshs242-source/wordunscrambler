@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import HeroUnscrambler from '../components/HeroUnscrambler.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import FeaturesGrid from '../components/FeaturesGrid.astro';
+import SeoAboutSection from '../components/SeoAboutSection.astro';
+import FaqSection from '../components/FaqSection.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Word Unscrambler - Find Words from Letters | Free Online Tool"
+  description="Unscramble letters to find valid words instantly. Free word unscrambler tool with multiple dictionaries (ENABLE, TWL, CSW), wildcard support, definitions, and word frequency data. Perfect for Scrabble, Wordle, and word games."
+  canonical="https://wordunscramblar.com/"
+>
+  <Navbar />
+  <main class="flex-1">
+    <HeroUnscrambler />
+    <HowItWorks />
+    <FeaturesGrid />
+    <SeoAboutSection />
+    <FaqSection />
+  </main>
+  <Footer />
+</Layout>

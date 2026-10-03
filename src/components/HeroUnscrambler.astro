@@ -1,0 +1,548 @@
+---
+/**
+ * HeroUnscrambler Component
+ * Main search interface for word unscrambling
+ */
+
+interface Props {
+  // Optional props for customization
+}
+---
+
+<section class="relative mx-auto w-full max-w-6xl px-4 py-16 sm:py-24 md:py-32">
+  <div class="relative z-20">
+    <!-- Header -->
+    <div class="mb-8 text-center">
+      <h1 class="mb-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+        Free Word Unscrambler - Find Words from Letters
+      </h1>
+      <p class="mx-auto max-w-2xl text-base text-[var(--body)] sm:text-lg">
+        Unscramble letters instantly with our <strong>best word unscrambler</strong> tool. Find all valid words, use wildcard filters, and get definitions. Perfect for Scrabble, Wordle, Words with Friends, and all word games.
+      </p>
+    </div>
+
+    <!-- Search Form -->
+    <div class="mx-auto mb-8 max-w-2xl">
+      <div class="geist-card rounded-2xl p-6 sm:p-8">
+        <!-- Main Input Row -->
+        <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:gap-4">
+          <input
+            id="lettersInput"
+            type="text"
+            placeholder="Unscramble letters here (e.g., 'acdemo' or 'c?t')"
+            class="flex-1 rounded-lg border border-[var(--hairline)] bg-[var(--canvas)] px-4 py-3 font-mono text-sm focus:border-[var(--link)] focus:outline-none focus:ring-2 focus:ring-[var(--link)]/20"
+            maxlength="15"
+          />
+          <button
+            id="searchBtn"
+            class="whitespace-nowrap rounded-lg bg-[var(--primary)] px-6 py-3 font-semibold text-[var(--on-primary)] transition-all hover:opacity-90 active:scale-95"
+          >
+            Search
+          </button>
+          <button
+            id="clearBtn"
+            class="whitespace-nowrap rounded-lg border border-[var(--hairline)] bg-[var(--canvas-subtle)] px-6 py-3 font-semibold text-[var(--body)] transition-all hover:border-[var(--faint)]"
+          >
+            Clear
+          </button>
+        </div>
+
+        <!-- Dictionary & Advanced Options -->
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <!-- Dictionary Selector -->
+          <div class="flex items-center gap-3">
+            <label for="dictionarySelect" class="text-sm font-medium text-[var(--body)]">
+              Dictionary:
+            </label>
+            <select
+              id="dictionarySelect"
+              class="rounded-lg border border-[var(--hairline)] bg-[var(--canvas)] px-3 py-2 text-sm focus:border-[var(--link)] focus:outline-none"
+            >
+              <option value="ENABLE">ENABLE (Standard)</option>
+              <option value="TWL">TWL (North America)</option>
+              <option value="CSW">CSW (International)</option>
+            </select>
+          </div>
+
+          <!-- Advanced Filters Toggle -->
+          <button
+            id="toggleFiltersBtn"
+            class="inline-flex items-center gap-2 rounded-lg border border-[var(--hairline)] bg-[var(--canvas-subtle)] px-3 py-2 text-sm font-medium text-[var(--body)] transition-all hover:border-[var(--faint)]"
+          >
+            <span>Advanced Filters</span>
+            <span id="filterIcon" class="text-sm">▼</span>
+          </button>
+        </div>
+
+        <!-- Advanced Filters (Hidden by default) -->
+        <div id="advancedFilters" class="mt-6 hidden space-y-4 border-t border-[var(--hairline)] pt-6">
+          <div class="grid gap-4 sm:grid-cols-3">
+            <div>
+              <label for="startsWithInput" class="mb-2 block text-sm font-medium text-[var(--body)]">
+                Starts with:
+              </label>
+              <input
+                id="startsWithInput"
+                type="text"
+                placeholder="e.g., 'st'"
+                class="w-full rounded-lg border border-[var(--hairline)] bg-[var(--canvas)] px-3 py-2 text-sm focus:border-[var(--link)] focus:outline-none"
+                maxlength="5"
+              />
+            </div>
+            <div>
+              <label for="endsWithInput" class="mb-2 block text-sm font-medium text-[var(--body)]">
+                Ends with:
+              </label>
+              <input
+                id="endsWithInput"
+                type="text"
+                placeholder="e.g., 'ing'"
+                class="w-full rounded-lg border border-[var(--hairline)] bg-[var(--canvas)] px-3 py-2 text-sm focus:border-[var(--link)] focus:outline-none"
+                maxlength="5"
+              />
+            </div>
+            <div>
+              <label for="mustIncludeInput" class="mb-2 block text-sm font-medium text-[var(--body)]">
+                Must include:
+              </label>
+              <input
+                id="mustIncludeInput"
+                type="text"
+                placeholder="e.g., 'qu'"
+                class="w-full rounded-lg border border-[var(--hairline)] bg-[var(--canvas)] px-3 py-2 text-sm focus:border-[var(--link)] focus:outline-none"
+                maxlength="5"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Helper Text -->
+      <div class="mt-4 flex gap-6 text-xs text-[var(--mute)]">
+        <div>
+          <span class="font-semibold">Tip:</span> Use <span class="font-mono">?</span> or <span class="font-mono">*</span> as wildcards
+        </div>
+        <div>
+          <span class="font-semibold">Max:</span> 15 letters
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div id="loadingState" class="mx-auto mb-8 hidden max-w-2xl">
+      <div class="flex items-center justify-center gap-3 rounded-lg border border-[var(--hairline)] bg-[var(--canvas-subtle)] p-4">
+        <div class="h-4 w-4 animate-spin rounded-full border-2 border-[var(--hairline)] border-t-[var(--link)]"></div>
+        <span class="text-sm text-[var(--body)]">Finding words...</span>
+      </div>
+    </div>
+
+    <!-- Results Section -->
+    <div id="resultsContainer" class="mx-auto hidden max-w-2xl">
+      <!-- Results Header -->
+      <div class="mb-4 flex items-center justify-between">
+        <div>
+          <h2 class="text-lg font-semibold text-[var(--ink)]">
+            Results: <span id="resultCount">0</span> words found
+          </h2>
+          <p class="text-sm text-[var(--mute)]">
+            Searched: <span id="searchedLetters" class="font-mono"></span>
+          </p>
+        </div>
+        <button
+          id="copyAllBtn"
+          class="rounded-lg border border-[var(--hairline)] bg-[var(--canvas-subtle)] px-4 py-2 text-sm font-medium text-[var(--body)] transition-all hover:border-[var(--faint)]"
+        >
+          Copy All
+        </button>
+      </div>
+
+      <!-- Results by Word Length -->
+      <div id="resultsGroups" class="space-y-6">
+        <!-- Results will be inserted here dynamically -->
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div id="emptyState" class="mx-auto hidden max-w-2xl">
+      <div class="rounded-lg border border-[var(--hairline)] bg-[var(--canvas-subtle)] p-8 text-center">
+        <p class="text-[var(--body)]">Enter some letters and click Search to find words.</p>
+      </div>
+    </div>
+
+    <!-- Error State -->
+    <div id="errorState" class="mx-auto hidden max-w-2xl">
+      <div class="rounded-lg border border-red-300 bg-red-50 p-4 text-red-800 dark:border-red-700 dark:bg-red-950/20 dark:text-red-300">
+        <p id="errorMessage" class="text-sm font-medium"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Word Meaning Modal -->
+  <div id="wordModal" class="pointer-events-none fixed inset-0 z-50 flex items-center justify-center bg-black/50 opacity-0 transition-opacity duration-200">
+    <div class="pointer-events-auto relative w-full max-w-xs sm:max-w-md rounded-2xl border border-[var(--hairline)] bg-[var(--canvas-elevated)] p-4 sm:p-6 sm:p-8 max-h-[90vh] overflow-y-auto shadow-2xl">
+      <!-- Close Button -->
+      <button
+        id="closeModalBtn"
+        class="absolute right-4 top-4 rounded-lg p-1 text-[var(--mute)] transition-colors hover:bg-[var(--canvas-subtle)] hover:text-[var(--ink)]"
+        aria-label="Close"
+      >
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <!-- Modal Content -->
+      <div>
+        <h3 class="mb-2 text-2xl font-bold text-[var(--ink)]">
+          <span id="modalWord" class="font-mono text-[var(--accent-blue)]"></span>
+        </h3>
+
+        <div class="mb-4 flex items-center gap-3 text-sm text-[var(--mute)]">
+          <span>
+            Length: <span id="modalLength" class="font-semibold text-[var(--body)]"></span>
+          </span>
+          <span>•</span>
+          <span>
+            Frequency: <span id="modalFrequency" class="font-semibold text-[var(--body)]"></span>/100
+          </span>
+        </div>
+
+        <!-- Definition -->
+        <div class="mb-6 rounded-lg border border-[var(--hairline)] bg-[var(--canvas-subtle)] p-4">
+          <h4 class="mb-2 text-xs font-semibold uppercase tracking-wide text-[var(--mute)]">Definition</h4>
+          <p id="modalDefinition" class="text-sm leading-relaxed text-[var(--body)]"></p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex gap-3">
+          <button
+            id="copyWordBtn"
+            class="flex-1 rounded-lg bg-[var(--primary)] px-4 py-2 text-sm font-semibold text-[var(--on-primary)] transition-all hover:opacity-90"
+          >
+            Copy Word
+          </button>
+          <button
+            id="closeModalBtn2"
+            class="flex-1 rounded-lg border border-[var(--hairline)] bg-[var(--canvas-subtle)] px-4 py-2 text-sm font-semibold text-[var(--body)] transition-all hover:border-[var(--faint)]"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { unscramble, groupResultsByLength, getUserPreferences, saveUserPreferences } from '../utils/wordDatabase';
+
+  // Search state to prevent race conditions
+  let isSearching = false;
+
+  // Helper function to safely get elements
+  function getElement<T extends Element>(id: string): T | null {
+    return document.getElementById(id) as T | null;
+  }
+
+  // Wait for DOM to be ready before initializing
+  function initializeApp() {
+    // DOM Elements
+    const lettersInput = getElement<HTMLInputElement>('lettersInput');
+    const searchBtn = getElement<HTMLButtonElement>('searchBtn');
+    const clearBtn = getElement<HTMLButtonElement>('clearBtn');
+    const dictionarySelect = getElement<HTMLSelectElement>('dictionarySelect');
+    const toggleFiltersBtn = getElement<HTMLButtonElement>('toggleFiltersBtn');
+    const advancedFilters = getElement<HTMLDivElement>('advancedFilters');
+    const filterIcon = getElement<HTMLSpanElement>('filterIcon');
+    const loadingState = getElement<HTMLDivElement>('loadingState');
+    const resultsContainer = getElement<HTMLDivElement>('resultsContainer');
+    const resultsGroups = getElement<HTMLDivElement>('resultsGroups');
+    const resultCount = getElement<HTMLSpanElement>('resultCount');
+    const searchedLetters = getElement<HTMLSpanElement>('searchedLetters');
+    const copyAllBtn = getElement<HTMLButtonElement>('copyAllBtn');
+    const emptyState = getElement<HTMLDivElement>('emptyState');
+    const errorState = getElement<HTMLDivElement>('errorState');
+    const errorMessage = getElement<HTMLParagraphElement>('errorMessage');
+
+    // Modal Elements
+    const wordModal = getElement<HTMLDivElement>('wordModal');
+    const modalWord = getElement<HTMLSpanElement>('modalWord');
+    const modalLength = getElement<HTMLSpanElement>('modalLength');
+    const modalFrequency = getElement<HTMLSpanElement>('modalFrequency');
+    const modalDefinition = getElement<HTMLParagraphElement>('modalDefinition');
+    const closeModalBtn = getElement<HTMLButtonElement>('closeModalBtn');
+    const closeModalBtn2 = getElement<HTMLButtonElement>('closeModalBtn2');
+    const copyWordBtn = getElement<HTMLButtonElement>('copyWordBtn');
+
+    // Filter inputs
+    const startsWithInput = getElement<HTMLInputElement>('startsWithInput');
+    const endsWithInput = getElement<HTMLInputElement>('endsWithInput');
+    const mustIncludeInput = getElement<HTMLInputElement>('mustIncludeInput');
+
+    // Verify all elements exist
+    if (!lettersInput || !searchBtn || !clearBtn || !dictionarySelect || !loadingState ||
+        !resultsContainer || !emptyState || !errorState || !errorMessage || !wordModal) {
+      console.error('HeroUnscrambler: Required DOM elements not found');
+      return;
+    }
+
+    // Load user preferences
+    function loadPreferences() {
+      const prefs = getUserPreferences();
+      dictionarySelect!.value = prefs.dictionary;
+    }
+
+    // Save user preferences
+    function savePreferences() {
+      saveUserPreferences({ dictionary: dictionarySelect!.value as 'ENABLE' | 'TWL' | 'CSW' });
+    }
+
+    // Modal Functions
+    function openModal(word: string, length: number, frequency: number, definition?: string) {
+      if (!modalWord || !modalLength || !modalFrequency || !modalDefinition || !wordModal) return;
+
+      modalWord.textContent = word;
+      modalLength.textContent = length.toString();
+      modalFrequency.textContent = frequency.toString();
+      modalDefinition.textContent = definition || 'No definition available';
+      wordModal.classList.remove('pointer-events-none', 'opacity-0');
+      wordModal.classList.add('pointer-events-auto', 'opacity-100');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      if (!wordModal) return;
+      wordModal.classList.add('pointer-events-none', 'opacity-0');
+      wordModal.classList.remove('pointer-events-auto', 'opacity-100');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close modal button handlers
+    if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+    if (closeModalBtn2) closeModalBtn2.addEventListener('click', closeModal);
+
+    // Close modal when clicking outside
+    if (wordModal) {
+      wordModal.addEventListener('click', (e) => {
+        if (e.target === wordModal) {
+          closeModal();
+        }
+      });
+    }
+
+    // Copy word from modal
+    if (copyWordBtn) {
+      copyWordBtn.addEventListener('click', () => {
+        if (!modalWord) return;
+        const word = modalWord.textContent;
+        if (word) {
+          navigator.clipboard.writeText(word).then(() => {
+            const originalText = copyWordBtn.textContent;
+            copyWordBtn.textContent = 'Copied!';
+            setTimeout(() => {
+              copyWordBtn.textContent = originalText;
+            }, 1500);
+          }).catch(err => {
+            console.error('Failed to copy:', err);
+          });
+        }
+      });
+    }
+
+    // Toggle advanced filters
+    if (toggleFiltersBtn && advancedFilters && filterIcon) {
+      toggleFiltersBtn.addEventListener('click', () => {
+        advancedFilters.classList.toggle('hidden');
+        filterIcon.textContent = advancedFilters.classList.contains('hidden') ? '▼' : '▲';
+      });
+    }
+
+    // Clear form
+    clearBtn!.addEventListener('click', () => {
+      lettersInput!.value = '';
+      if (startsWithInput) startsWithInput.value = '';
+      if (endsWithInput) endsWithInput.value = '';
+      if (mustIncludeInput) mustIncludeInput.value = '';
+      resultsContainer!.classList.add('hidden');
+      emptyState!.classList.remove('hidden');
+      errorState!.classList.add('hidden');
+      lettersInput!.focus();
+    });
+
+    // Perform search with race condition prevention
+    async function performSearch() {
+      // Prevent multiple simultaneous searches
+      if (isSearching) return;
+      isSearching = true;
+
+      try {
+        const letters = lettersInput!.value.trim();
+
+        if (!letters) {
+          errorMessage!.textContent = 'Please enter some letters';
+          errorState!.classList.remove('hidden');
+          resultsContainer!.classList.add('hidden');
+          emptyState!.classList.add('hidden');
+          return;
+        }
+
+        if (letters.length > 15) {
+          errorMessage!.textContent = 'Maximum 15 letters allowed';
+          errorState!.classList.remove('hidden');
+          resultsContainer!.classList.add('hidden');
+          emptyState!.classList.add('hidden');
+          return;
+        }
+
+        // Show loading state
+        loadingState!.classList.remove('hidden');
+        resultsContainer!.classList.add('hidden');
+        emptyState!.classList.add('hidden');
+        errorState!.classList.add('hidden');
+
+        // Prepare options
+        const options = {
+          letters,
+          dictionary: dictionarySelect!.value,
+          ...(startsWithInput?.value && { startsWith: startsWithInput.value }),
+          ...(endsWithInput?.value && { endsWith: endsWithInput.value }),
+          ...(mustIncludeInput?.value && { mustInclude: mustIncludeInput.value }),
+        };
+
+        // Perform unscrambling
+        const results = unscramble(options);
+        const grouped = groupResultsByLength(results);
+
+        // Hide loading
+        loadingState!.classList.add('hidden');
+
+        if (results.length === 0) {
+          emptyState!.classList.remove('hidden');
+          return;
+        }
+
+        // Populate results
+        resultCount!.textContent = results.length.toString();
+        searchedLetters!.textContent = letters;
+        resultsGroups!.innerHTML = '';
+
+        for (const [length, words] of Object.entries(grouped)) {
+          const groupDiv = document.createElement('div');
+          groupDiv.className = 'geist-card rounded-xl p-4 sm:p-6';
+
+          const header = document.createElement('h3');
+          header.className = 'mb-3 text-sm font-semibold text-[var(--mute)] uppercase tracking-wide';
+          header.textContent = `${length}-letter words (${words.length})`;
+          groupDiv.appendChild(header);
+
+          const wordsGrid = document.createElement('div');
+          wordsGrid.className = 'grid grid-cols-2 gap-1.5 sm:gap-2 sm:grid-cols-3 md:grid-cols-4';
+
+          for (const word of words) {
+            const wordBtn = document.createElement('button');
+            wordBtn.className = 'group relative rounded-lg border border-[var(--hairline)] bg-[var(--canvas)] px-3 py-2 text-left text-sm font-medium transition-all hover:border-[var(--link)] hover:bg-[var(--canvas-elevated)] cursor-pointer';
+            wordBtn.type = 'button';
+            wordBtn.dataset.word = word.word;
+            wordBtn.dataset.length = word.length.toString();
+            wordBtn.dataset.frequency = word.frequency.toString();
+            wordBtn.dataset.definition = word.definition || 'No definition available';
+
+            const wordSpan = document.createElement('span');
+            wordSpan.className = 'font-mono font-semibold text-[var(--ink)]';
+            wordSpan.textContent = word.word;
+
+            const frequencySpan = document.createElement('span');
+            frequencySpan.className = 'ml-2 text-xs text-[var(--mute)]';
+            frequencySpan.textContent = `${word.frequency}`;
+
+            wordBtn.appendChild(wordSpan);
+            wordBtn.appendChild(frequencySpan);
+
+            // Open modal on click to show definition
+            wordBtn.addEventListener('click', function(e) {
+              e.preventDefault();
+              e.stopPropagation();
+              const wordData = this.dataset;
+              openModal(wordData.word!, parseInt(wordData.length!), parseInt(wordData.frequency!), wordData.definition);
+            });
+
+            wordsGrid.appendChild(wordBtn);
+          }
+
+          groupDiv.appendChild(wordsGrid);
+          resultsGroups!.appendChild(groupDiv);
+        }
+
+        resultsContainer!.classList.remove('hidden');
+
+        // Save preferences
+        savePreferences();
+      } catch (error) {
+        console.error('Search error:', error);
+        loadingState!.classList.add('hidden');
+        errorMessage!.textContent = 'An error occurred while searching';
+        errorState!.classList.remove('hidden');
+      } finally {
+        // Always reset the searching flag
+        isSearching = false;
+      }
+    }
+
+    // Search button click
+    searchBtn!.addEventListener('click', performSearch);
+
+    // Enter key in input
+    lettersInput!.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        performSearch();
+      }
+    });
+
+    // Dictionary change
+    dictionarySelect!.addEventListener('change', savePreferences);
+
+    // Copy all results
+    if (copyAllBtn) {
+      copyAllBtn.addEventListener('click', () => {
+        if (!resultsGroups) return;
+        const allWords: string[] = [];
+        resultsGroups.querySelectorAll('button').forEach(btn => {
+          const wordText = btn.querySelector('span')?.textContent;
+          if (wordText) {
+            allWords.push(wordText);
+          }
+        });
+
+        if (allWords.length > 0) {
+          navigator.clipboard.writeText(allWords.join('\n')).then(() => {
+            const originalText = copyAllBtn.textContent;
+            copyAllBtn.textContent = 'Copied!';
+            setTimeout(() => {
+              copyAllBtn.textContent = originalText;
+            }, 1500);
+          }).catch(err => {
+            console.error('Failed to copy:', err);
+          });
+        }
+      });
+    }
+
+    // Keyboard shortcut: Escape to close modal
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && wordModal && !wordModal.classList.contains('pointer-events-none')) {
+        closeModal();
+      }
+    });
+
+    // Initialize
+    loadPreferences();
+    emptyState!.classList.remove('hidden');
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeApp);
+  } else {
+    initializeApp();
+  }
+</script>

@@ -1,0 +1,95 @@
+---
+// FaqSection.astro - Interactive Accordion FAQ for Users & SEO
+const faqs = [
+  {
+    q: "What is a word unscrambler and how does it work?",
+    a: "A word unscrambler is a free online tool that helps you find valid words from scrambled or jumbled letters. Simply enter your letters, and our algorithm instantly searches through multiple dictionaries to unscramble letters and display all possible words that can be formed. It's perfect for Scrabble, Wordle, Words with Friends, and other word games."
+  },
+  {
+    q: "Is the best word unscrambler completely free to use?",
+    a: "Yes, our word unscrambler is 100% free with unlimited searches, no sign-ups, no registration, and no hidden fees. Unscramble as many letter combinations as you need, forever free. No premium tiers or paywalls."
+  },
+  {
+    q: "What's the maximum number of letters I can unscramble?",
+    a: "You can unscramble up to 15 letters at a time with our word unscrambler. Whether you need a word unscrambler for 5 letters, 7 letters, or longer combinations, we've got you covered. Most games use 7-12 letters anyway."
+  },
+  {
+    q: "How do I find words with specific letters using wildcards?",
+    a: "Use ? or * as wildcard characters for unknown letters. For example, to find words with letters matching 'c?t', our word unscrambler will find 'cat', 'cot', 'cut', and other valid words. Wildcards let you solve partial clues and word patterns instantly."
+  },
+  {
+    q: "Which word unscrambler dictionaries are supported?",
+    a: "We support three comprehensive dictionaries: ENABLE (standard English words), TWL (used in North American Scrabble tournaments), and CSW (used for international and Collins Scrabble play). Choose your preferred dictionary to unscramble letters accurately for your specific word game."
+  },
+  {
+    q: "Can I filter word unscrambler results by word length?",
+    a: "Absolutely! Find word unscrambler 5 letters, word unscrambler 7 letters, or any specific length. Use our advanced filters to narrow results by: 'Starts with' (specific beginning letters), 'Ends with' (specific ending letters), and 'Must include' (required letters). This helps you find exactly the words you need."
+  },
+  {
+    q: "What do the frequency scores mean in our word unscrambler?",
+    a: "Frequency scores (0-100) show how commonly a word is used in English. Higher scores indicate more frequently-used words. This helps you pick the most likely and strategic words when playing games like Wordle or Scrabble."
+  },
+  {
+    q: "Does this word unscrambler game tool work on mobile devices?",
+    a: "Yes! Our word unscrambler is fully responsive and works perfectly on smartphones, tablets, and desktops. Whether you're using an iPhone, Android, iPad, or computer, you can unscramble letters and play word games anywhere, anytime."
+  },
+  {
+    q: "Is my privacy protected when using the word unscrambler?",
+    a: "Absolutely. We don't collect personal data, don't require logins, and don't track your searches. All unscrambling happens directly in your browser—completely private and secure. Your word searches are never stored or shared."
+  }
+];
+---
+
+<section id="faq" class="mx-auto w-full max-w-4xl px-4 py-16 sm:px-6">
+  <div class="text-center">
+    <span class="font-mono text-xs font-semibold tracking-wider text-[var(--mute)] uppercase">
+      FREQUENTLY ASKED QUESTIONS
+    </span>
+    <h2 class="mt-2 text-2xl font-bold tracking-tight text-[var(--ink)] sm:text-3xl">
+      Everything You Need to Know
+    </h2>
+    <p class="mx-auto mt-2 max-w-lg text-sm text-[var(--body)]">
+      Get quick answers about features, dictionaries, wildcards, filters, and privacy.
+    </p>
+  </div>
+
+  <div class="mt-10 space-y-3">
+    {faqs.map((f, i) => (
+      <div class="geist-card overflow-hidden rounded-xl">
+        <button
+          type="button"
+          class="faq-toggle flex w-full items-center justify-between p-4 sm:p-5 text-left text-sm font-semibold text-[var(--ink)] transition hover:bg-[var(--canvas-subtle)]"
+          aria-expanded="false"
+          aria-controls={`faq-answer-${i}`}
+        >
+          <span>{f.q}</span>
+          <svg class="faq-icon h-5 w-5 shrink-0 text-[var(--mute)] transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div id={`faq-answer-${i}`} class="faq-content hidden border-t border-[var(--hairline-soft)] px-4 py-3 sm:px-5 sm:py-4 text-xs leading-relaxed text-[var(--body)] sm:text-sm">
+          {f.a}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<script is:inline>
+  document.querySelectorAll('.faq-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+      const content = btn.nextElementSibling;
+      const icon = btn.querySelector('.faq-icon');
+
+      btn.setAttribute('aria-expanded', !isExpanded);
+      if (isExpanded) {
+        content.classList.add('hidden');
+        icon.classList.remove('rotate-180');
+      } else {
+        content.classList.remove('hidden');
+        icon.classList.add('rotate-180');
+      }
+    });
+  });
+</script>

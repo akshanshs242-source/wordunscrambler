@@ -1,0 +1,113 @@
+---
+/**
+ * GameSupport Component
+ * Showcases games where the word unscrambler is useful
+ */
+
+const games = [
+  {
+    name: 'Scrabble',
+    description: 'Find high-scoring words for competitive board play',
+    icon: '🎲',
+  },
+  {
+    name: 'Wordle',
+    description: 'Solve daily word puzzles with pattern matching',
+    icon: '🎯',
+  },
+  {
+    name: 'Words with Friends',
+    description: 'Crush your opponents with powerful word finds',
+    icon: '👥',
+  },
+  {
+    name: 'Wordscapes',
+    description: 'Progress through levels with unscrambled words',
+    icon: '🏔️',
+  },
+  {
+    name: 'Wordfeud',
+    description: 'Real-time multiplayer word game solver',
+    icon: '⚡',
+  },
+  {
+    name: 'Quordle',
+    description: 'Master four Wordles simultaneously',
+    icon: '4️⃣',
+  },
+  {
+    name: 'Spelling Bee',
+    description: 'Find all possible words from letter combinations',
+    icon: '🐝',
+  },
+  {
+    name: 'Crosswords',
+    description: 'Fill in missing words with confidence',
+    icon: '✏️',
+  },
+];
+---
+
+<section class="mx-auto w-full max-w-6xl px-4 py-16 sm:py-24">
+  <div class="mb-12 text-center">
+    <h2 class="mb-4 text-3xl font-bold tracking-tight sm:text-4xl">
+      Perfect for Your Favorite Games
+    </h2>
+    <p class="mx-auto max-w-2xl text-base text-[var(--body)] sm:text-lg">
+      Whether you're playing Scrabble, Wordle, or any word game, our unscrambler gives you the edge you need.
+    </p>
+  </div>
+
+  <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    {games.map((game) => (
+      <div class="geist-card group rounded-xl p-6 transition-all hover:shadow-lg">
+        <div class="mb-3 text-3xl">{game.icon}</div>
+        <h3 class="mb-2 text-lg font-semibold text-[var(--ink)]">{game.name}</h3>
+        <p class="text-sm text-[var(--body)]">{game.description}</p>
+      </div>
+    ))}
+  </div>
+
+  <!-- Quick Access Links -->
+  <div class="mt-16 rounded-2xl border border-[var(--hairline)] bg-gradient-to-br from-[var(--canvas-subtle)] to-[var(--canvas)] p-8">
+    <h3 class="mb-6 text-xl font-semibold text-[var(--ink)]">Quick Solver Links</h3>
+    <div class="grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <a
+        href="#"
+        class="rounded-lg border border-[var(--hairline)] bg-[var(--canvas-elevated)] px-4 py-2 text-center text-sm font-medium transition-all hover:border-[var(--link)] hover:text-[var(--link)]"
+      >
+        Wordle Solver
+      </a>
+      <a
+        href="#"
+        class="rounded-lg border border-[var(--hairline)] bg-[var(--canvas-elevated)] px-4 py-2 text-center text-sm font-medium transition-all hover:border-[var(--link)] hover:text-[var(--link)]"
+      >
+        Scrabble Helper
+      </a>
+      <a
+        href="#"
+        class="rounded-lg border border-[var(--hairline)] bg-[var(--canvas-elevated)] px-4 py-2 text-center text-sm font-medium transition-all hover:border-[var(--link)] hover:text-[var(--link)]"
+      >
+        WWF Finder
+      </a>
+      <a
+        href="#"
+        class="rounded-lg border border-[var(--hairline)] bg-[var(--canvas-elevated)] px-4 py-2 text-center text-sm font-medium transition-all hover:border-[var(--link)] hover:text-[var(--link)]"
+      >
+        Wordscapes Help
+      </a>
+      <a
+        href="#"
+        class="rounded-lg border border-[var(--hairline)] bg-[var(--canvas-elevated)] px-4 py-2 text-center text-sm font-medium transition-all hover:border-[var(--link)] hover:text-[var(--link)]"
+      >
+        Spelling Bee
+      </a>
+      <a
+        href="#"
+        class="rounded-lg border border-[var(--hairline)] bg-[var(--canvas-elevated)] px-4 py-2 text-center text-sm font-medium transition-all hover:border-[var(--link)] hover:text-[var(--link)]"
+      >
+        Crossword Aid
+      </a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,144 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="About Us - Word Unscrambler"
+  description="Learn about Word Unscrambler, a free online tool for finding words from scrambled letters."
+  canonical="https://wordunscramblar.com/about-us"
+>
+  <Navbar />
+  <main class="flex-1">
+    <div class="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-24">
+      <!-- Header -->
+      <div class="mb-16 text-center">
+        <h1 class="text-4xl font-bold tracking-tight text-[var(--ink)] sm:text-5xl">
+          About Word Unscrambler
+        </h1>
+        <p class="mt-4 text-lg text-[var(--body)]">
+          A free, fast, and reliable tool for word game enthusiasts
+        </p>
+      </div>
+
+      <!-- Main Content -->
+      <div class="space-y-12">
+        <section>
+          <h2 class="text-3xl font-bold text-[var(--ink)] mb-4">Our Mission</h2>
+          <p class="text-[var(--body)] leading-relaxed">
+            Word Unscrambler is dedicated to providing a fast, accurate, and free tool for anyone who loves word games. Whether you're playing Scrabble, Wordle, Words with Friends, or any other word game, our mission is to help you find words quickly and effortlessly—without paywalls or registration requirements.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-3xl font-bold text-[var(--ink)] mb-4">Why We Built This</h2>
+          <p class="text-[var(--body)] leading-relaxed mb-4">
+            Word games have been a source of entertainment and mental stimulation for decades. We noticed that most word unscrambler tools were either slow, cluttered with ads, or locked behind paywalls. We decided to build something different: a tool that's:
+          </p>
+          <ul class="space-y-3 ml-6">
+            <li class="flex gap-3 text-[var(--body)]">
+              <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-[var(--accent-blue)]/20">
+                <svg class="w-4 h-4 text-[var(--accent-blue)]" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+              </span>
+              <span><strong>Fast:</strong> Get results in milliseconds, not seconds</span>
+            </li>
+            <li class="flex gap-3 text-[var(--body)]">
+              <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-[var(--accent-blue)]/20">
+                <svg class="w-4 h-4 text-[var(--accent-blue)]" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+              </span>
+              <span><strong>Free:</strong> No ads, no premium features, no registration</span>
+            </li>
+            <li class="flex gap-3 text-[var(--body)]">
+              <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-[var(--accent-blue)]/20">
+                <svg class="w-4 h-4 text-[var(--accent-blue)]" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+              </span>
+              <span><strong>Comprehensive:</strong> Multiple dictionaries and advanced filters</span>
+            </li>
+            <li class="flex gap-3 text-[var(--body)]">
+              <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-[var(--accent-blue)]/20">
+                <svg class="w-4 h-4 text-[var(--accent-blue)]" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+              </span>
+              <span><strong>Private:</strong> No data collection or tracking</span>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="text-3xl font-bold text-[var(--ink)] mb-4">Our Features</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="rounded-lg border border-[var(--hairline)] bg-[var(--canvas-elevated)] p-6">
+              <h3 class="font-semibold text-[var(--ink)] mb-2">Multiple Dictionaries</h3>
+              <p class="text-sm text-[var(--body)]">Support for ENABLE, TWL, and CSW dictionaries to cover all word game variations.</p>
+            </div>
+            <div class="rounded-lg border border-[var(--hairline)] bg-[var(--canvas-elevated)] p-6">
+              <h3 class="font-semibold text-[var(--ink)] mb-2">Wildcard Support</h3>
+              <p class="text-sm text-[var(--body)]">Use ? or * to find words with unknown letters.</p>
+            </div>
+            <div class="rounded-lg border border-[var(--hairline)] bg-[var(--canvas-elevated)] p-6">
+              <h3 class="font-semibold text-[var(--ink)] mb-2">Advanced Filtering</h3>
+              <p class="text-sm text-[var(--body)]">Filter by word length, starting letter, ending letter, and more.</p>
+            </div>
+            <div class="rounded-lg border border-[var(--hairline)] bg-[var(--canvas-elevated)] p-6">
+              <h3 class="font-semibold text-[var(--ink)] mb-2">Word Definitions</h3>
+              <p class="text-sm text-[var(--body)]">Learn what words mean with built-in definitions.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="rounded-lg border border-[var(--hairline)] bg-[var(--canvas-elevated)] p-8">
+          <h2 class="text-2xl font-bold text-[var(--ink)] mb-4">Zero Compromise on Privacy</h2>
+          <p class="text-[var(--body)] leading-relaxed">
+            Your privacy is paramount to us. We don't collect your searches, track your activity, or sell your data. Word Unscrambler is built with privacy-first principles—your word games are your own business.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-3xl font-bold text-[var(--ink)] mb-4">Supported Games</h2>
+          <p class="text-[var(--body)] mb-4 leading-relaxed">
+            Word Unscrambler helps you excel at popular word games:
+          </p>
+          <ul class="grid grid-cols-2 md:grid-cols-3 gap-3">
+            <li class="flex items-center gap-2 text-[var(--body)]">
+              <span class="text-[var(--accent-blue)]">→</span> Scrabble
+            </li>
+            <li class="flex items-center gap-2 text-[var(--body)]">
+              <span class="text-[var(--accent-blue)]">→</span> Wordle
+            </li>
+            <li class="flex items-center gap-2 text-[var(--body)]">
+              <span class="text-[var(--accent-blue)]">→</span> Words with Friends
+            </li>
+            <li class="flex items-center gap-2 text-[var(--body)]">
+              <span class="text-[var(--accent-blue)]">→</span> Wordscapes
+            </li>
+            <li class="flex items-center gap-2 text-[var(--body)]">
+              <span class="text-[var(--accent-blue)]">→</span> Spelling Bee
+            </li>
+            <li class="flex items-center gap-2 text-[var(--body)]">
+              <span class="text-[var(--accent-blue)]">→</span> Crosswords
+            </li>
+          </ul>
+        </section>
+
+        <section class="text-center pt-8 border-t border-[var(--hairline)]">
+          <h2 class="text-2xl font-bold text-[var(--ink)] mb-4">Ready to Unscramble?</h2>
+          <p class="text-[var(--body)] mb-6">
+            Start using Word Unscrambler today—it's free, fast, and privacy-friendly.
+          </p>
+          <a href="/" class="inline-flex items-center rounded-lg bg-[var(--primary)] px-6 py-3 font-semibold text-[var(--on-primary)] transition-transform hover:scale-105">
+            Launch Word Unscrambler
+          </a>
+        </section>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>

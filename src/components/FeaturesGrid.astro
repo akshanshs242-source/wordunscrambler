@@ -1,0 +1,73 @@
+---
+// FeaturesGrid.astro - 6 Key Value Propositions vs Competitors
+const features = [
+  {
+    title: "Multiple Dictionary Support",
+    description: "Best word unscrambler with 3 dictionaries: ENABLE (standard), TWL (North American tournaments), and CSW (international). Choose the perfect dictionary to unscramble letters for your game.",
+    tag: "3 DICTIONARIES"
+  },
+  {
+    title: "Wildcard & Pattern Matching",
+    description: "Use ? or * as wildcards to unscramble letters with missing positions. Perfect for solving partial clues and word patterns when you're stuck.",
+    tag: "SMART MATCHING"
+  },
+  {
+    title: "Advanced Word Filtering",
+    description: "Filter words by length, starting letters, ending letters. Find word unscrambler 5 letters, 7 letters, or any specific pattern instantly with powerful filtering.",
+    tag: "POWERFUL FILTERS"
+  },
+  {
+    title: "Word Definitions & Frequency",
+    description: "Every word includes definitions and frequency scores (0-100). Understand what each word means and how commonly it's used in English.",
+    tag: "DEFINITIONS"
+  },
+  {
+    title: "Lightning-Fast Unscrambling",
+    description: "Get word unscrambler results in under 200ms. No waiting, no lag. Instant discovery of all valid words every time you search.",
+    tag: "SUPER FAST"
+  },
+  {
+    title: "100% Free Word Unscrambler",
+    description: "No premium plans, no paywalls, no registration needed. Unscramble unlimited letters forever for free. The best free word unscrambler available.",
+    tag: "FREE FOREVER"
+  }
+];
+---
+
+<section id="features" class="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">
+  <div class="text-center">
+    <span class="font-mono text-xs font-semibold tracking-wider text-[var(--mute)] uppercase">
+      ENGINEERED FOR EXCELLENCE
+    </span>
+    <h2 class="mt-2 text-2xl font-bold tracking-tight text-[var(--ink)] sm:text-3xl">
+      Why Word Unscrambler is the Best
+    </h2>
+    <p class="mx-auto mt-2 max-w-xl text-sm text-[var(--body)]">
+      Powerful features designed to help you dominate at word games and puzzles.
+    </p>
+  </div>
+
+  <div class="mt-12 grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {features.map(f => (
+      <div class="geist-card flex flex-col justify-between rounded-2xl p-4 sm:p-6 sm:p-7">
+        <div>
+          <div class="inline-flex rounded-full border border-[var(--hairline)] bg-[var(--canvas-subtle)] px-2.5 py-0.5 font-mono text-[10px] font-semibold text-[var(--mute)]">
+            {f.tag}
+          </div>
+          <h3 class="mt-4 text-base font-bold text-[var(--ink)]">
+            {f.title}
+          </h3>
+          <p class="mt-2 text-sm leading-relaxed text-[var(--body)]">
+            {f.description}
+          </p>
+        </div>
+        <div class="mt-6 flex items-center gap-1.5 font-mono text-xs text-emerald-600 dark:text-emerald-400">
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+          </svg>
+          <span>Included by default</span>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
