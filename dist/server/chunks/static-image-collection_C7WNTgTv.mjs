@@ -1,7 +1,7 @@
 globalThis.process ??= {};
 globalThis.process.env ??= {};
 import { C as prependForwardSlash, S as joinPaths, c as isESMImportedImage, n as propsToFilename, t as hashTransform, w as removeBase } from "./assets_Bml5tHrV.mjs";
-import { t as getInstalledRenderScope } from "./entrypoints_BDPKfZVT.mjs";
+import { t as getInstalledRenderScope } from "./entrypoints_Dekyzzgb.mjs";
 //#region node_modules/astro/dist/core/render-scope/record.js
 function recordStaticImage(image) {
 	getInstalledRenderScope()?.getStore()?.staticImages?.push(image);
