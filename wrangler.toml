@@ -1,5 +1,5 @@
 name = "word-unscrambler"
-account_id = "f7b8ac7210345333fdaea635bb9944c1"
+account_id = "${CLOUDFLARE_ACCOUNT_ID}"
 workers_dev = true
 
 [env.production]
