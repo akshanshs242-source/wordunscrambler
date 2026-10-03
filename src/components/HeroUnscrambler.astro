@@ -56,7 +56,7 @@ interface Props {
             </label>
             <select
               id="dictionarySelect"
-              class="rounded-lg border border-[var(--hairline)] bg-[var(--canvas)] px-3 py-2 text-sm focus:border-[var(--link)] focus:outline-none"
+              class="active:scale-95 cursor-pointer rounded-lg border border-[var(--hairline)] bg-[var(--canvas)] px-3 py-2 text-sm font-medium transition-all active:opacity-80 focus:border-[var(--link)] focus:outline-none focus:ring-2 focus:ring-[var(--link)]/20 hover:border-[var(--link)] sm:min-w-[180px]"
             >
               <option value="ENABLE">ENABLE (Standard)</option>
               <option value="TWL">TWL (North America)</option>
@@ -67,10 +67,10 @@ interface Props {
           <!-- Advanced Filters Toggle -->
           <button
             id="toggleFiltersBtn"
-            class="inline-flex items-center gap-2 rounded-lg border border-[var(--hairline)] bg-[var(--canvas-subtle)] px-3 py-2 text-sm font-medium text-[var(--body)] transition-all hover:border-[var(--faint)]"
+            class="active:scale-95 inline-flex items-center gap-2 rounded-lg border border-[var(--hairline)] bg-[var(--canvas-subtle)] px-3 py-2 text-sm font-medium text-[var(--body)] transition-all active:opacity-80 focus:outline-none focus:ring-2 focus:ring-[var(--link)]/20 hover:border-[var(--faint)] hover:bg-[var(--canvas)]"
           >
             <span>Advanced Filters</span>
-            <span id="filterIcon" class="text-sm">▼</span>
+            <span id="filterIcon" class="transition-transform duration-200 text-sm">▼</span>
           </button>
         </div>
 
@@ -150,7 +150,7 @@ interface Props {
         </div>
         <button
           id="copyAllBtn"
-          class="rounded-lg border border-[var(--hairline)] bg-[var(--canvas-subtle)] px-4 py-2 text-sm font-medium text-[var(--body)] transition-all hover:border-[var(--faint)]"
+          class="active:scale-95 rounded-lg border border-[var(--hairline)] bg-[var(--canvas-subtle)] px-4 py-2 text-sm font-medium text-[var(--body)] transition-all active:opacity-80 focus:outline-none focus:ring-2 focus:ring-[var(--link)]/20 hover:border-[var(--link)] hover:bg-[var(--canvas)]"
         >
           Copy All
         </button>
@@ -351,9 +351,13 @@ interface Props {
 
     // Toggle advanced filters
     if (toggleFiltersBtn && advancedFilters && filterIcon) {
-      toggleFiltersBtn.addEventListener('click', () => {
+      toggleFiltersBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         advancedFilters.classList.toggle('hidden');
-        filterIcon.textContent = advancedFilters.classList.contains('hidden') ? '▼' : '▲';
+        const isHidden = advancedFilters.classList.contains('hidden');
+        filterIcon.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(180deg)';
+        filterIcon.textContent = '▼';
       });
     }
 
@@ -440,7 +444,7 @@ interface Props {
 
           for (const word of words) {
             const wordBtn = document.createElement('button');
-            wordBtn.className = 'group relative rounded-lg border border-[var(--hairline)] bg-[var(--canvas)] px-3 py-2 text-left text-sm font-medium transition-all hover:border-[var(--link)] hover:bg-[var(--canvas-elevated)] cursor-pointer';
+            wordBtn.className = 'group relative rounded-lg border border-[var(--hairline)] bg-[var(--canvas)] px-3 py-2 text-left text-sm font-medium transition-all active:scale-95 active:opacity-80 focus:outline-none focus:ring-2 focus:ring-[var(--link)]/50 hover:border-[var(--link)] hover:bg-[var(--canvas-elevated)] cursor-pointer select-none';
             wordBtn.type = 'button';
             wordBtn.dataset.word = word.word;
             wordBtn.dataset.length = word.length.toString();
@@ -458,13 +462,16 @@ interface Props {
             wordBtn.appendChild(wordSpan);
             wordBtn.appendChild(frequencySpan);
 
-            // Open modal on click to show definition
-            wordBtn.addEventListener('click', function(e) {
+            // Open modal on click/touch to show definition
+            function handleWordClick(e: Event) {
               e.preventDefault();
               e.stopPropagation();
-              const wordData = this.dataset;
+              const wordData = wordBtn.dataset;
               openModal(wordData.word!, parseInt(wordData.length!), parseInt(wordData.frequency!), wordData.definition);
-            });
+            }
+
+            wordBtn.addEventListener('click', handleWordClick);
+            wordBtn.addEventListener('touchend', handleWordClick);
 
             wordsGrid.appendChild(wordBtn);
           }
@@ -506,10 +513,10 @@ interface Props {
       copyAllBtn.addEventListener('click', () => {
         if (!resultsGroups) return;
         const allWords: string[] = [];
-        resultsGroups.querySelectorAll('button').forEach(btn => {
-          const wordText = btn.querySelector('span')?.textContent;
-          if (wordText) {
-            allWords.push(wordText);
+        resultsGroups.querySelectorAll('button[data-word]').forEach(btn => {
+          const word = btn.getAttribute('data-word');
+          if (word) {
+            allWords.push(word);
           }
         });
 
@@ -517,11 +524,14 @@ interface Props {
           navigator.clipboard.writeText(allWords.join('\n')).then(() => {
             const originalText = copyAllBtn.textContent;
             copyAllBtn.textContent = 'Copied!';
+            copyAllBtn.disabled = true;
             setTimeout(() => {
               copyAllBtn.textContent = originalText;
+              copyAllBtn.disabled = false;
             }, 1500);
           }).catch(err => {
             console.error('Failed to copy:', err);
+            alert('Failed to copy to clipboard');
           });
         }
       });
