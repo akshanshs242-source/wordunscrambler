@@ -1,5 +1,5 @@
-# https://viddownloadr.com robots.txt
+# https://wordunscramblar.com robots.txt
 User-agent: *
 Allow: /
 
-Sitemap: https://viddownloadr.com/sitemap.xml
+Sitemap: https://wordunscramblar.com/sitemap.xml
